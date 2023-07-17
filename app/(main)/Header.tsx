@@ -14,6 +14,7 @@ import FencingIcon from '~/assets/icons/FencingIcon'
 
 import { NavigationBar } from '~/app/(main)/NavigationBar'
 import { url } from '~/lib'
+import Link from 'next/link'
 
 export function Header() {
 
@@ -21,7 +22,7 @@ export function Header() {
     <>
       <header className="sticky top-0 z-40 w-full border-b bg-cyan-600">
         <div className="px-4 py-2 inline-flex w-full items-center">
-          <div className="inline-flex gap-2"><FencingIcon className='w-5 h-5' />Fencing Previewer</div>
+          <Link className="inline-flex gap-2" href={'/'}><FencingIcon className='w-5 h-5' />Fencing Previewer</Link>
 
           <div className="flex flex-1 justify-end ">
             <NavigationBar.Desktop className="pointer-events-auto relative z-50 md:hidden" />
@@ -39,6 +40,7 @@ function UserInfo() {
   const pathname = usePathname()
   const { user } = useUser()
 
+  // TODO: 
   console.log(user)
   return (
     <>

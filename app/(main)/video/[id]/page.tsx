@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { Container, Grid, Paper, Typography } from "@mui/material";

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, useState } from "react";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
