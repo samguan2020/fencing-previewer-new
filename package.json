@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.21.15",
+    "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.0",
     "@mui/material": "^5.14.0",
+    "@mui/styles": "^5.14.0",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -27,7 +30,11 @@
     "postcss": "8.4.26",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-player": "^2.12.0",
+    "screenfull": "^6.0.2",
     "tailwindcss": "3.3.3",
+    "tss-react": "^4.8.8",
     "typescript": "5.1.6"
   }
 }
