@@ -2,7 +2,7 @@
 const nextConfig = {
 
   images: {
-    domains: ['via.placeholder.com', 'youtube.com'],
+    domains: ['via.placeholder.com', 'assets.trpc.io', 'youtube.com'],
   },
 }
 

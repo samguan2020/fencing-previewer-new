@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Grid, Paper, Slider, Tooltip, Typography } from "@mui/material";
+import { Container, Grid, Paper, Typography } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import ReactPlayer from "react-player";
 import screenful from "screenfull";
@@ -8,7 +8,8 @@ import screenful from "screenfull";
 import { useRef, useState } from "react";
 import Controls from "../Controls";
 
-import { Video } from "~/types";
+import { videos } from "~/data/videos";
+import { notFound } from "next/navigation";
 
 const useStyles = makeStyles({
   playerWrapper: {
@@ -86,16 +87,6 @@ const useStyles = makeStyles({
   },
 });
 
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
-
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
-}
-
 const format = (seconds) => {
   if (isNaN(seconds)) {
     return `00:00`;
@@ -112,7 +103,11 @@ const format = (seconds) => {
 
 let count = 0;
 
-export default function VideoPage({ url }: { url: string }) {
+export default function VideoPage({
+  params,
+}: {
+  params: { id: string }
+}) {
   const classes = useStyles();
   const [timeDisplayFormat, setTimeDisplayFormat] = useState("normal");
   const [bookmarks, setBookmarks] = useState([]);
@@ -149,12 +144,14 @@ export default function VideoPage({ url }: { url: string }) {
     volume,
   } = state;
 
-  const video: Video = {
-    id: '2',
-    title: 'test2',
-    description: 'test2',
-    thumbnail: 'https://via.placeholder.com/128x128',
-    href: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+  // TODO: use fetch
+  function getVideo(id: string) {
+    return videos.find((video) => video.id === id)
+  }
+
+  const video = getVideo(params.id)
+  if (!video) {
+    notFound()
   }
 
   const handlePlayPause = () => {
@@ -294,7 +291,7 @@ export default function VideoPage({ url }: { url: string }) {
           ref={playerRef}
           width="100%"
           height="100%"
-          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          url={video.url}
           pip={pip}
           playing={playing}
           controls={false}
@@ -342,7 +339,7 @@ export default function VideoPage({ url }: { url: string }) {
 
       <Grid container style={{ marginTop: 20 }} spacing={3}>
         {bookmarks.map((bookmark, index) => (
-          <Grid key={index} item>
+          <Grid key={index} item className="hover:cursor-pointer">
             <Paper
               onClick={() => {
                 playerRef.current.seekTo(bookmark.time);

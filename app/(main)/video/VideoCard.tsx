@@ -4,7 +4,7 @@ import { Video } from '~/types'
 
 export function VideoCard({ video }: { video: Video }) {
   return (
-    <Link className="flex flex-col shadow-sm overflow-hidden" href={`/video/${video.id}?src=${video.href}`}>
+    <Link className="flex flex-col shadow-sm overflow-hidden" href={`/video/${video.id}`}>
       <div className="flex-shrink-0">
         <Image
           className="h-48 w-full object-cover"
