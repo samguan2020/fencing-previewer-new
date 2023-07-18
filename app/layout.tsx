@@ -5,17 +5,18 @@ import { Inter } from 'next/font/google'
 
 import { ClerkProvider } from '@clerk/nextjs'
 
-import { ThemeProvider } from '~/app/(main)/ThemeProvider'
 import ThemeRegistry from '~/components/ThemeRegistry/ThemeRegistry'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Video Server',
+  title: 'Fencing Previewer',
   description: '',
   icons: {
     icon: "/icon.svg",
-  }
+  },
+  manifest: '/manifest.json',
+
 }
 
 export default function RootLayout({
@@ -33,6 +34,5 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-
   )
 }
