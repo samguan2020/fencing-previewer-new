@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { forwardRef, useState } from "react";
+import clsx from 'clsx'
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
@@ -183,7 +184,7 @@ const Controls = React.forwardRef((
           >
             <FastRewindIcon
               className={classes.controlIcons}
-              fontSize="inherit"
+              fontSize="large"
             />
           </IconButton>
           <IconButton
@@ -192,9 +193,9 @@ const Controls = React.forwardRef((
             aria-label="play"
           >
             {playing ? (
-              <PauseIcon fontSize="inherit" className={classes.controlIcons} />
+              <PauseIcon fontSize="large" className={classes.controlIcons} />
             ) : (
-              <PlayArrowIcon fontSize="inherit" className={classes.controlIcons} />
+              <PlayArrowIcon fontSize="large" className={classes.controlIcons} />
             )}
           </IconButton>
           <IconButton
@@ -202,7 +203,7 @@ const Controls = React.forwardRef((
             className={classes.controlIcons}
             aria-label="forward"
           >
-            <FastForwardIcon fontSize="inherit" className={classes.controlIcons} />
+            <FastForwardIcon fontSize="large" className={classes.controlIcons} />
           </IconButton>
         </Grid>
         {/* bottom controls */}
@@ -230,15 +231,15 @@ const Controls = React.forwardRef((
           </Grid>
 
           <Grid item>
-            <Grid container direction="row" alignItems="center">
+            <div className="flex items-center ">
               <IconButton
                 onClick={onPlayPause}
                 className={classes.bottomIcons}
               >
                 {playing ? (
-                  <PauseIcon fontSize="large" className={classes.controlIcons} />
+                  <PauseIcon fontSize="medium" className={classes.controlIcons} />
                 ) : (
-                  <PlayArrowIcon fontSize="large" className={classes.controlIcons} />
+                  <PlayArrowIcon fontSize="medium" className={classes.controlIcons} />
                 )}
               </IconButton>
 
@@ -248,11 +249,11 @@ const Controls = React.forwardRef((
                 className={`${classes.bottomIcons} ${classes.volumeButton}`}
               >
                 {muted ? (
-                  <VolumeMute fontSize="large" className={classes.controlIcons} />
+                  <VolumeMute fontSize="medium" className={classes.controlIcons} />
                 ) : volume > 0.5 ? (
-                  <VolumeUp fontSize="large" className={classes.controlIcons} />
+                  <VolumeUp fontSize="medium" className={classes.controlIcons} />
                 ) : (
-                  <VolumeDown fontSize="large" className={classes.controlIcons} />
+                  <VolumeDown fontSize="medium" className={classes.controlIcons} />
                 )}
               </IconButton>
 
@@ -262,10 +263,11 @@ const Controls = React.forwardRef((
                 value={muted ? 0 : volume * 100}
                 onChange={onVolumeChange}
                 aria-labelledby="input-slider"
-                className={classes.volumeSlider}
+                className={clsx('ml-2 mr-4', classes.volumeSlider)}
                 onMouseDown={onSeekMouseDown}
                 onChangeCommitted={onVolumeSeekDown}
               />
+
               <Button
                 variant="text"
                 onClick={
@@ -283,7 +285,7 @@ const Controls = React.forwardRef((
                   {elapsedTime}/{totalDuration}
                 </Typography>
               </Button>
-            </Grid>
+            </div>
           </Grid>
 
           <Grid item>
@@ -332,7 +334,7 @@ const Controls = React.forwardRef((
               onClick={onToggleFullScreen}
               className={classes.bottomIcons}
             >
-              <FullScreen fontSize="large" className={classes.controlIcons} />
+              <FullScreen fontSize="medium" className={classes.controlIcons} />
             </IconButton>
           </Grid>
         </Grid>
