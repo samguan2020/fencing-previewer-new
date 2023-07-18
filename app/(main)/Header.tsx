@@ -4,6 +4,7 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
+  SignOutButton,
   UserButton,
   useUser,
 } from '@clerk/nextjs'
@@ -38,28 +39,28 @@ export function Header() {
 
 function UserInfo() {
   const pathname = usePathname()
-  const { user } = useUser()
 
-  // TODO: 
-  console.log(user)
   return (
     <>
       <SignedIn key="user-info">
         <div
-          className="pointer-events-auto relative flex h-10 items-center"
+          className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-gray-800 text-gray-100 shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs"
         >
-          <UserButton
+          <SignOutButton />
+          {/* <UserButton
             afterSignOutUrl={url(pathname).href}
             appearance={{
               elements: {
                 avatarBox: 'w-9 h-9 ring-2 ring-white/20',
               },
             }}
-          />
+          /> */}
         </div>
       </SignedIn>
       <SignedOut key="sign-in">
-        <SignInButton />
+        <div className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-gray-800 text-gray-100 shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs" >
+          <SignInButton mode="modal" redirectUrl={url(pathname).href} />
+        </div>
       </SignedOut></>
   )
 }
