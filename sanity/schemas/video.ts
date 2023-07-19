@@ -34,6 +34,8 @@ export interface Video {
   description?: string
   mainImage?: ImageAsset
   video?: FileAsset
+  imageUrl?: string
+  videoUrl?: string
 }
 
 export default defineType({
@@ -81,10 +83,15 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'video',
-      title: 'Video',
-      type: 'file',
+      name: 'videoUrl',
+      title: 'VideoUrl',
+      type: 'text',
     }),
+    // defineField({
+    //   name: 'video',
+    //   title: 'Video',
+    //   type: 'file',
+    // }),
 
     defineField({
       name: 'publishedAt',

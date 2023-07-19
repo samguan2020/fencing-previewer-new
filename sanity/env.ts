@@ -14,6 +14,8 @@ export const projectId = assertValue(
 
 export const useCdn = env.NEXT_PUBLIC_SANITY_USE_CDN
 
+export const token = env.NEXT_PUBLIC_SANITY_API_TOKEN
+
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
     throw new Error(errorMessage)

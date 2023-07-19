@@ -365,11 +365,11 @@ export default function VideoPlayer({
         ref={playerContainerRef}
         className={classes.playerWrapper}
       >
-        <ReactPlayer
+        {video.videoUrl ? (<ReactPlayer
           ref={playerRef}
           width="100%"
           height="100%"
-          url={video.video?.asset.url}
+          url={video.videoUrl}
           pip={pip}
           playing={playing}
           controls={false}
@@ -386,7 +386,10 @@ export default function VideoPlayer({
               },
             },
           }}
-        />
+        />) :
+          <div className="flex justify-center items-center h-64 bg-gray-200">Video not found</div>
+        }
+
 
         <Controls
           ref={controlsRef}

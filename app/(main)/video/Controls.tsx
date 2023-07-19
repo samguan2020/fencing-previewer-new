@@ -187,7 +187,7 @@ const Controls = React.forwardRef((
           >
             <FastRewindIcon
               className={classes.controlIcons}
-              fontSize="large"
+              fontSize="medium"
             />
           </IconButton>
           <IconButton
@@ -196,9 +196,9 @@ const Controls = React.forwardRef((
             aria-label="play"
           >
             {playing ? (
-              <PauseIcon fontSize="large" className={classes.controlIcons} />
+              <PauseIcon fontSize="medium" className={classes.controlIcons} />
             ) : (
-              <PlayArrowIcon fontSize="large" className={classes.controlIcons} />
+              <PlayArrowIcon fontSize="medium" className={classes.controlIcons} />
             )}
           </IconButton>
           <IconButton
@@ -206,7 +206,7 @@ const Controls = React.forwardRef((
             className={classes.controlIcons}
             aria-label="forward"
           >
-            <FastForwardIcon fontSize="large" className={classes.controlIcons} />
+            <FastForwardIcon fontSize="medium" className={classes.controlIcons} />
           </IconButton>
         </Grid>
         {/* bottom controls */}
@@ -221,9 +221,6 @@ const Controls = React.forwardRef((
             <PrettoSlider
               min={0}
               max={100}
-              valuelabelcomponent={(props) => (
-                <ValueLabelComponent {...props} value={elapsedTime} />
-              )}
               aria-label="custom thumb label"
               value={played * 100}
               onChange={onSeek}

@@ -1,10 +1,16 @@
 import { groq } from 'next-sanity'
 
 import { clientFetch, client } from '~/sanity/lib/client'
-import {Video} from '~/sanity/schemas/video'
+import { Video } from '~/sanity/schemas/video'
 
 export const getAllVideosQuery = groq`
-  *[_type == "video" && authId == $authId]
+  *[_type == "video" && authId == $authId]{
+    _id,
+    title,
+    description,
+    "imageUrl": mainImage.asset->url,
+    videoUrl
+  }
   `
 
 export const getAllVideos = async (authId: string) => {
@@ -12,23 +18,13 @@ export const getAllVideos = async (authId: string) => {
 }
 
 export const getVideoByIdQuery = groq`
-  *[_type == "video" && _id == $_id][0]{
+  *[_type == "video" && _id == $_id]{
     _id,
     title,
     description,
-    mainImage {
-      _ref,
-      asset->{
-        url,
-      }
-    },
-    video {
-      _ref,
-      asset->{
-        url,
-      }
-    }
-  }
+    "imageUrl": mainImage.asset->url,
+    videoUrl
+  }[0]
   `
 
 export const getVideoById = async (_id:string) => {
@@ -44,3 +40,14 @@ export async function deleteVideoById(id: string) {
   const result = client.delete(id)
   return result
 }
+
+export async function updateFile(file: File) {
+  function rename(name: string) {
+    const ext = name.split('.').pop()
+    return `${Date.now()}.${ext}`
+  }
+
+  const result = await client.assets.upload('file', file,{filename: rename(file.name)})
+  return result
+}
+
