@@ -3,16 +3,17 @@ import Link from 'next/link'
 import { VideoList } from './video/VideoList'
 import { currentUser } from '@clerk/nextjs';
 import { VideoCard } from './video/VideoCard';
+import { Video } from '~/sanity/schemas/video';
 
 export default async function Home() {
   const user = await currentUser();
 
-  const demoVideo = {
+  const demoVideo: any = {
     id: '1',
     title: 'test video',
     description: 'test1',
-    thumbnail: 'https://via.placeholder.com/384x384',
-    url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+    mainImage: { asset: { url: 'https://via.placeholder.com/384x384' } },
+    video: { asset: { url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" } }
   }
 
   if (!user) return (

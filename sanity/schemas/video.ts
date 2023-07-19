@@ -41,6 +41,12 @@ export default defineType({
   title: 'Video',
   type: 'document',
   fields: [
+    // clerk 登录后的用户 id
+    defineField({
+      name: 'authId',
+      title: 'AuthId',
+      type: 'string',
+    }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -60,12 +66,12 @@ export default defineType({
       title: 'Description',
       type: 'text',
     }),
-    defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
-    }),
+    // defineField({
+    //   name: 'author',
+    //   title: 'Author',
+    //   type: 'reference',
+    //   to: {type: 'author'},
+    // }),
     defineField({
       name: 'mainImage',
       title: 'Main image',

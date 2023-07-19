@@ -465,7 +465,7 @@ export default function VideoPlayer({
               onMouseLeave={handlePopoverClose}
             >
               <i
-                className="absolute -top-3 -right-3 text-gray-500 opacity-0 group-hover:text-red-500 group-hover:opacity-100"
+                className="absolute -top-3 -right-3 text-gray-500 opacity-0 group-hover:text-red-500 group-hover:opacity-100 transition cursor-pointer"
                 onClick={(event) => deleteBookmark(event, index)}
               >
                 <CloseIcon />
