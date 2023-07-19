@@ -14,7 +14,7 @@ export default async function Home() {
         <h1 className='font-semibold text-lg'>Not logged in</h1>
         <p>but you can look at this video</p>
         <div className='w-[400px]'>
-          <VideoCard video={firstVideo}></VideoCard>
+          <VideoCard video={firstVideo} noClose></VideoCard>
         </div>
       </div>
     </main>
