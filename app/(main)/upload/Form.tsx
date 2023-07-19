@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, IconButton, OutlinedInput, Snackbar, Stack } from "@mui/material";
+import { Alert, Button, CircularProgress, IconButton, OutlinedInput, Snackbar, Stack } from "@mui/material";
 import Upload from './Upload'
 import { UploadFile as UploadFileIcon } from "@mui/icons-material";
 import { useState } from "react";
@@ -16,11 +16,26 @@ export default function UploadForm({ authId }: { authId: string }) {
 
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('')
+  const [severity, setSeverity] = useState('success'); // New severity state
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileUpload = async (file: File) => {
-    const result = await updateFile(file)
+    setIsLoading(true);
 
-    setVideoUrl(result.url)
+    try {
+      const result = await updateFile(file);
+      setVideoUrl(result.url);
+      setMessage('File Uploaded Successfully');
+      setSeverity('success');
+      setOpen(true);
+    } catch (error) {
+      setMessage('Error uploading file');
+      setSeverity('error');
+      setOpen(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -55,14 +70,16 @@ export default function UploadForm({ authId }: { authId: string }) {
       videoUrl: videoUrl,
       authId: authId
     }
-
+    console.log(video)
     if (!title || !description || !videoUrl) {
+      setSeverity('warning');
+
       setMessage('Please fill all the fields')
       return
     }
 
     await createVideo(video)
-
+    setSeverity('success');
     setMessage('Video Uploaded Successfully')
   }
 
@@ -107,22 +124,29 @@ export default function UploadForm({ authId }: { authId: string }) {
             />
           </div>
           <div className="mt-4">
-
-            <Upload onFileUpload={handleFileUpload}></Upload>
+            <Upload disable={isLoading} onFileUpload={handleFileUpload}></Upload>
           </div>
         </div>
-        <Button variant="contained" fullWidth startIcon={<UploadFileIcon />} onClick={() => handleCrateVideo()}>
-          Create Video
+        <Button
+          variant="contained"
+          fullWidth
+          startIcon={<UploadFileIcon />}
+          onClick={() => handleCrateVideo()}
+          disabled={isLoading} // Disable the button when loading
+        >
+          {isLoading ? <CircularProgress size={20} /> : 'Create Video'}
         </Button>
 
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={open}
           autoHideDuration={6000}
-          onClose={handleClose}
-          message={message}
           action={action}
-        />
+        >
+          <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
       </div>
     </main>
   );

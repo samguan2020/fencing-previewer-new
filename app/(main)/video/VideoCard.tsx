@@ -22,8 +22,8 @@ export function VideoCard({ video }: { video: Video }) {
       </form>
 
       <CardMedia
-        sx={{ height: 140 }}
-        image={video.imageUrl}
+        component="video"
+        image={video.videoUrl}
         title={video.title}
       />
       <CardContent>
