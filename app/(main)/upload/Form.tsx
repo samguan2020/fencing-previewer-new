@@ -1,6 +1,6 @@
 'use client'
 
-import { Alert, Button, CircularProgress, IconButton, OutlinedInput, Snackbar, Stack } from "@mui/material";
+import { Alert, AlertColor, Button, CircularProgress, IconButton, OutlinedInput, Snackbar, Stack } from "@mui/material";
 import Upload from './Upload'
 import { UploadFile as UploadFileIcon } from "@mui/icons-material";
 import { useState } from "react";
@@ -16,7 +16,7 @@ export default function UploadForm({ authId }: { authId: string }) {
 
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('')
-  const [severity, setSeverity] = useState('success'); // New severity state
+  const [severity, setSeverity] = useState<AlertColor>('success'); // New severity state
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -85,7 +85,6 @@ export default function UploadForm({ authId }: { authId: string }) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 lg:p-8">
-
       <div className="w-full">
         <h2 className="font-semibold text-xl" >Upload Video</h2>
 
