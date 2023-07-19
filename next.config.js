@@ -1,18 +1,19 @@
 const runtimeCaching = require('next-pwa/cache')
 
-const withPWA = require('next-pwa')
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  runtimeCaching,
+  disable: process.env.NODE_ENV === 'development'
+})
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ['via.placeholder.com', 'assets.trpc.io', 'youtube.com'],
+  experimental: {
+    serverActions: true,
   },
-
-  pwa: {
-    dest: 'public',
-    runtimeCaching,
-    disable: process.env.NODE_ENV === 'development'
+  images: {
+    domains: ['cdn.sanity.io', 'via.placeholder.com', 'assets.trpc.io', 'youtube.com'],
   },
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)

@@ -1,4 +1,7 @@
 // @ts-nocheck
+
+"use client"
+
 import React, { forwardRef, useState } from "react";
 import clsx from 'clsx'
 import Typography from "@mui/material/Typography";
@@ -218,7 +221,7 @@ const Controls = React.forwardRef((
             <PrettoSlider
               min={0}
               max={100}
-              ValueLabelComponent={(props) => (
+              valuelabelcomponent={(props) => (
                 <ValueLabelComponent {...props} value={elapsedTime} />
               )}
               aria-label="custom thumb label"

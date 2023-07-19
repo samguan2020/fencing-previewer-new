@@ -1,13 +1,14 @@
 
 
 import { VideoCard } from './VideoCard'
-import { videos } from '~/data/videos';
+import { getAllVideos } from '~/sanity/queries'
 
 export async function VideoList() {
+  const videos = await getAllVideos()
   return (
     <>
       {videos.map((video) => (
-        <VideoCard video={video} key={video.id} />
+        <VideoCard video={video} key={video._id} />
       ))}
     </>
   )

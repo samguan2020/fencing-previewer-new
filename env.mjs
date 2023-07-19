@@ -9,7 +9,9 @@ const server = z.object({
 })
 
 const client = z.object({
-
+  NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().min(1),
+  NEXT_PUBLIC_SANITY_DATASET: z.string().min(1),
+  NEXT_PUBLIC_SANITY_USE_CDN: z.boolean(),
 })
 
 /**
@@ -21,6 +23,9 @@ const client = z.object({
 const processEnv = {
   NODE_ENV: process.env.NODE_ENV,
   VERCEL_ENV: process.env.VERCEL_ENV,
+  NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  NEXT_PUBLIC_SANITY_USE_CDN: process.env.NEXT_PUBLIC_SANITY_USE_CDN == 'true',
 }
 
 // Don't touch the part below
