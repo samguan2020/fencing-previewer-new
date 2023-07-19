@@ -3,18 +3,10 @@ import Link from 'next/link'
 import { VideoList } from './video/VideoList'
 import { currentUser } from '@clerk/nextjs';
 import { VideoCard } from './video/VideoCard';
-import { Video } from '~/sanity/schemas/video';
+import { firstVideo } from '~/data/video';
 
 export default async function Home() {
   const user = await currentUser();
-
-  const demoVideo: any = {
-    id: '1',
-    title: 'test video',
-    description: 'test1',
-    mainImage: { asset: { url: 'https://via.placeholder.com/384x384' } },
-    video: { asset: { url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" } }
-  }
 
   if (!user) return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 lg:p-8">
@@ -22,7 +14,7 @@ export default async function Home() {
         <h1 className='font-semibold text-lg'>Not logged in</h1>
         <p>but you can look at this video</p>
         <div className='w-[400px]'>
-          <VideoCard video={demoVideo}></VideoCard>
+          <VideoCard video={firstVideo}></VideoCard>
         </div>
       </div>
     </main>

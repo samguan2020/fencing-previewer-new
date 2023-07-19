@@ -23,6 +23,7 @@ export function VideoCard({ video }: { video: Video }) {
 
       <CardMedia
         component="video"
+        controls
         image={video.videoUrl}
         title={video.title}
       />
