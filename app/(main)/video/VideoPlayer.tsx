@@ -233,7 +233,7 @@ export default function VideoPlayer({
   };
 
   const hanldeMouseLeave = () => {
-    controlsRef.current.style.visibility = "hidden";
+    controlsRef.current.style.visibility = "visible";
     count = 0;
   };
 
@@ -388,7 +388,6 @@ export default function VideoPlayer({
         />) :
           <div className="flex justify-center items-center h-64 bg-gray-200">Video not found</div>
         }
-
 
         <Controls
           ref={controlsRef}

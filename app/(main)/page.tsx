@@ -13,7 +13,7 @@ export default async function Home() {
       <div className='w-full flex gap-2 flex-col justify-center items-center'>
         <h1 className='font-semibold text-lg'>Not logged in</h1>
         <p>but you can look at this video</p>
-        <div className='w-[400px]'>
+        <div className='w-max-[375px] mx-auto'>
           <VideoCard video={firstVideo} noClose></VideoCard>
         </div>
       </div>

@@ -44,9 +44,9 @@ const useStyles = makeStyles({
     margin: "4px",
   },
   controlIcons: {
-    color: "#777",
+    color: "#999",
 
-    fontSize: 50,
+    size: 50,
     transform: "scale(0.9)",
     "&:hover": {
       color: "#fff",
@@ -65,21 +65,6 @@ const useStyles = makeStyles({
     width: 100,
   },
 });
-
-const PrettoSlider = withStyles(Slider, (theme) => ({
-
-}));
-
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
-
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
-}
-
 
 interface ControlsProps {
   video?: Video
@@ -160,17 +145,18 @@ const Controls = React.forwardRef((
           container
           direction="row"
           alignItems="center"
+          wrap="nowrap"
           justifyContent="space-between"
-          style={{ padding: 16 }}
+          style={{ padding: 12 }}
         >
-          <Grid item>
-            <Typography variant="h5" style={{ color: "#fff" }}>
-              {video?.title}
-            </Typography>
+          <Grid item className="opacity-0 sm:opacity-100">
+            <h4 className="text-base text-white">    {video?.title}
+            </h4>
           </Grid>
-          <Grid item>
+          <Grid item className="flex justify-self-end">
             <Button
               onClick={onBookmark}
+              size="small"
               variant="contained"
               color="primary"
               startIcon={<BookmarkIcon />}
@@ -179,34 +165,38 @@ const Controls = React.forwardRef((
             </Button>
           </Grid>
         </Grid>
+        {/* middle controls */}
         <Grid container direction="row" alignItems="center" justifyContent="center">
           <IconButton
+            size="medium"
             onClick={onRewind}
             className={classes.controlIcons}
             aria-label="rewind"
           >
             <FastRewindIcon
               className={classes.controlIcons}
-              fontSize="medium"
+              size="medium"
             />
           </IconButton>
           <IconButton
+            size="medium"
             onClick={onPlayPause}
             className={classes.controlIcons}
             aria-label="play"
           >
             {playing ? (
-              <PauseIcon fontSize="medium" className={classes.controlIcons} />
+              <PauseIcon size="medium" className={classes.controlIcons} />
             ) : (
-              <PlayArrowIcon fontSize="medium" className={classes.controlIcons} />
+              <PlayArrowIcon size="medium" className={classes.controlIcons} />
             )}
           </IconButton>
           <IconButton
+            size="medium"
             onClick={onFastForward}
             className={classes.controlIcons}
             aria-label="forward"
           >
-            <FastForwardIcon fontSize="medium" className={classes.controlIcons} />
+            <FastForwardIcon size="medium" className={classes.controlIcons} />
           </IconButton>
         </Grid>
         {/* bottom controls */}
@@ -215,13 +205,16 @@ const Controls = React.forwardRef((
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          style={{ padding: 16 }}
+          style={{ padding: 12 }}
+          spacing={0}
         >
-          <Grid item xs={12}>
-            <PrettoSlider
+          {/* bottom progress */}
+          <Grid item xs={12} >
+            <Slider
+              className="!py-2 md:!py-4"
               min={0}
               max={100}
-              aria-label="custom thumb label"
+              size="small"
               value={played * 100}
               onChange={onSeek}
               onMouseDown={onSeekMouseDown}
@@ -230,36 +223,40 @@ const Controls = React.forwardRef((
             />
           </Grid>
 
-          <Grid item>
-            <div className="flex items-center ">
+          <div className="flex w-full">
+            {/* bottom left */}
+            <Grid item xs={8} className="flex items-center !py-0">
               <IconButton
+                size="small"
                 onClick={onPlayPause}
                 className={classes.bottomIcons}
               >
                 {playing ? (
-                  <PauseIcon fontSize="medium" className={classes.controlIcons} />
+                  <PauseIcon size="small" className={classes.controlIcons} />
                 ) : (
-                  <PlayArrowIcon fontSize="medium" className={classes.controlIcons} />
+                  <PlayArrowIcon size="small" className={classes.controlIcons} />
                 )}
               </IconButton>
 
               <IconButton
+                size="small"
                 // onClick={() => setState({ ...state, muted: !state.muted })}
                 onClick={onMute}
                 className={`${classes.bottomIcons} ${classes.volumeButton}`}
               >
                 {muted ? (
-                  <VolumeMute fontSize="medium" className={classes.controlIcons} />
+                  <VolumeMute size="small" className={classes.controlIcons} />
                 ) : volume > 0.5 ? (
-                  <VolumeUp fontSize="medium" className={classes.controlIcons} />
+                  <VolumeUp size="small" className={classes.controlIcons} />
                 ) : (
-                  <VolumeDown fontSize="medium" className={classes.controlIcons} />
+                  <VolumeDown size="small" className={classes.controlIcons} />
                 )}
               </IconButton>
 
               <Slider
                 min={0}
                 max={100}
+                size="small"
                 value={muted ? 0 : volume * 100}
                 onChange={onVolumeChange}
                 aria-labelledby="input-slider"
@@ -270,73 +267,71 @@ const Controls = React.forwardRef((
 
               <Button
                 variant="text"
-                onClick={
-                  onChangeDispayFormat
-                  //     () =>
-                  //   setTimeDisplayFormat(
-                  //     timeDisplayFormat == "normal" ? "remaining" : "normal"
-                  //   )
-                }
               >
                 <Typography
                   variant="body1"
-                  style={{ color: "#fff", marginLeft: 16 }}
+                  style={{ color: "#fff" }}
                 >
                   {elapsedTime}/{totalDuration}
                 </Typography>
               </Button>
-            </div>
-          </Grid>
+            </Grid>
 
-          <Grid item>
-            <Button
-              onClick={handleClick}
-              aria-describedby={id}
-              className={classes.bottomIcons}
-              variant="text"
-            >
-              <Typography>{playbackRate}X</Typography>
-            </Button>
+            {/* bottom right*/}
+            <Grid item xs={4} className="flex justify-end  !py-0">
+              <Button
+                onClick={handleClick}
+                aria-describedby={id}
+                className={classes.bottomIcons}
+                variant="text"
+              >
+                <span className="text-sm">
+                  {playbackRate}X
+                </span>
+              </Button>
 
-            <Popover
-              container={ref.current}
-              open={open}
-              id={id}
-              onClose={handleClose}
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-            >
-              <Grid container direction="column-reverse">
-                {[0.25, 0.5, 1, 1.5, 2].map((rate) => (
-                  <Button
-                    key={rate}
-                    //   onClick={() => setState({ ...state, playbackRate: rate })}
-                    onClick={() => onPlaybackRateChange(rate)}
-                    variant="text"
-                  >
-                    <Typography
-                      color={rate === playbackRate ? "secondary" : "inherit"}
+              <Popover
+                container={ref.current}
+                open={open}
+                id={id}
+                onClose={handleClose}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                <div className="flex flex-col-reverse items-center">
+                  {[0.25, 0.5, 1, 1.5, 2].map((rate) => (
+                    <Button
+                      key={rate}
+                      //   onClick={() => setState({ ...state, playbackRate: rate })}
+                      onClick={() => onPlaybackRateChange(rate)}
+                      variant="text"
                     >
-                      {rate}X
-                    </Typography>
-                  </Button>
-                ))}
-              </Grid>
-            </Popover>
-            <IconButton
-              onClick={onToggleFullScreen}
-              className={classes.bottomIcons}
-            >
-              <FullScreen fontSize="medium" className={classes.controlIcons} />
-            </IconButton>
-          </Grid>
+                      <span
+                        className="text-sm"
+                        color={rate === playbackRate ? "secondary" : "inherit"}
+                      >
+                        {rate}X
+                      </span>
+                    </Button>
+                  ))}
+                </div>
+              </Popover>
+              <IconButton
+                size="small"
+                onClick={onToggleFullScreen}
+                className={classes.bottomIcons}
+              >
+                <FullScreen size="small" className={classes.controlIcons} />
+              </IconButton>
+            </Grid>
+          </div>
         </Grid>
       </Grid>
     </div>

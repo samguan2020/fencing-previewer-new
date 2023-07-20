@@ -1,7 +1,7 @@
 import { Footer } from '~/app/(main)/Footer'
 import { Header } from '~/app/(main)/Header'
 
-export default async function Layout({ children }:  {
+export default async function Layout({ children }: {
   children: React.ReactNode
 }) {
 

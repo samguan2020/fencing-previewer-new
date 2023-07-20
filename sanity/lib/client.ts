@@ -12,5 +12,5 @@ export const client = createClient({
 })
 
 // Wrap the cache function in a way that reuses the TypeScript definitions
-export const clientFetch = client.fetch.bind(client)
+export const clientFetch = cache(client.fetch.bind(client))
 

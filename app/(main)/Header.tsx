@@ -22,15 +22,14 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b bg-cyan-600">
+      <header className="sticky top-0 z-40 w-full border-b bg-cyan-600 text-sm mg:text-base">
         <div className="px-4 py-2 inline-flex w-full items-center">
-          <Link className="inline-flex gap-2 mr-2" href={'/'}><FencingIcon className='w-5 h-5' />Fencing Previewer</Link>
+          <Link className="inline-flex gap-2 mr-2 whitespace-nowrap" href={'/'}>🤺 Fencing Previewer</Link>
 
           {/* <PWAInstallButton /> */}
 
-          <div className="flex flex-1 justify-end ">
-            <NavigationBar.Desktop className="pointer-events-auto relative z-50 md:hidden" />
-            <NavigationBar.Desktop className="pointer-events-auto relative z-50 hidden md:block" />
+          <div className="flex flex-1 justify-end">
+            <NavigationBar.Desktop className="pointer-events-auto relative z-50 md:block" />
           </div>
 
           <UserInfo />
@@ -61,7 +60,7 @@ function UserInfo() {
         </div>
       </SignedIn>
       <SignedOut key="sign-in">
-        <div className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-gray-800 text-gray-100 shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs" >
+        <div className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-gray-800 text-gray-100 shadow hover:bg-primary/90 h-8 rounded-md px-2 whitespace-nowrap" >
           <SignInButton mode="modal" redirectUrl={url(pathname).href} />
         </div>
       </SignedOut></>
