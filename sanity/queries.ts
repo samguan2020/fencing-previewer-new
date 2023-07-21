@@ -14,7 +14,7 @@ export const getAllVideosQuery = groq`
   `
 
 export const getAllVideos = async (authId: string) => {
-  return await clientFetch<Video[]>(getAllVideosQuery, {authId})
+  return await client.fetch<Video[]>(getAllVideosQuery, {authId})
 }
 
 export const getVideoByIdQuery = groq`
@@ -44,7 +44,7 @@ export async function deleteVideoById(id: string) {
 export async function updateFile(file: File) {
   function rename(name: string) {
     const ext = name.split('.').pop()
-    return `${Date.now()}.${ext}`
+    return `${Date.now()}-name.${ext}`
   }
 
   const result = await client.assets.upload('file', file,{filename: rename(file.name)})

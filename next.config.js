@@ -12,7 +12,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ['cdn.sanity.io', 'via.placeholder.com', 'assets.trpc.io', 'youtube.com'],
+    domains: ['cdn.sanity.io', 'youtube.com'],
   },
 }
 

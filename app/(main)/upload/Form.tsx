@@ -60,7 +60,7 @@ export default function UploadForm({ authId }: { authId: string }) {
   );
 
 
-  const handleCrateVideo = async () => {
+  const handleCreateVideo = async () => {
     setOpen(true);
 
     const video: any = {
@@ -70,7 +70,7 @@ export default function UploadForm({ authId }: { authId: string }) {
       videoUrl: videoUrl,
       authId: authId
     }
-    console.log(video)
+
     if (!title || !description || !videoUrl) {
       setSeverity('warning');
 
@@ -78,9 +78,19 @@ export default function UploadForm({ authId }: { authId: string }) {
       return
     }
 
-    await createVideo(video)
-    setSeverity('success');
-    setMessage('Video Uploaded Successfully')
+    setIsLoading(true);
+
+    try {
+      await createVideo(video)
+      setSeverity('success');
+      setMessage('Video Uploaded Successfully')
+    } catch (error) {
+      console.error("Video creation failed:", error);
+      setSeverity('error');
+      setMessage('Error uploading video')
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -130,10 +140,10 @@ export default function UploadForm({ authId }: { authId: string }) {
           variant="contained"
           fullWidth
           startIcon={<UploadFileIcon />}
-          onClick={() => handleCrateVideo()}
-          disabled={isLoading} // Disable the button when loading
+          onClick={handleCreateVideo}
+          disabled={isLoading}
         >
-          {isLoading ? <CircularProgress size={20} /> : 'Create Video'}
+          {isLoading ? "Creating Video..." : "Create Video"}
         </Button>
 
         <Snackbar
