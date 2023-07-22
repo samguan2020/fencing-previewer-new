@@ -19,7 +19,7 @@ const Upload: React.FC<UploadProps> = ({ onFileUpload, disable = false }) => {
     const supportedFormats = ['video/mp4', 'video/quicktime', 'video/mov', 'video/webm'];
     const isVideoFormat = supportedFormats.includes(file.type);
 
-    if (file && file.size <= 10 * 1024 * 1024 && isVideoFormat) {
+    if (file && file.size <= 100 * 1024 * 1024 && isVideoFormat) {
       setSelectedFile(file);
       onFileUpload(file);
     } else {
@@ -63,7 +63,7 @@ const Upload: React.FC<UploadProps> = ({ onFileUpload, disable = false }) => {
         <DialogTitle>File Size or Format Limit</DialogTitle>
         <DialogContent>
           {fileSizeError ? (
-            <Typography variant="body1">The file size exceeds 10MB.</Typography>
+            <Typography variant="body1">The file size exceeds 100MB.</Typography>
           ) : (
             <Typography variant="body1">Only video files are supported.</Typography>
           )}
