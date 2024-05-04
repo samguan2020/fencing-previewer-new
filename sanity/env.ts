@@ -1,4 +1,4 @@
-import { env } from '~/env.mjs'
+import { env } from '../env.mjs'
 
 export const apiVersion = '2023-07-19'
 
@@ -8,7 +8,7 @@ export const dataset = assertValue(
 )
 
 export const projectId = assertValue(
-  env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  "od7yaz7l", //env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
 )
 
